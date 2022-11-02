@@ -39,7 +39,8 @@ public class GiaoDien extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		System.out.println("longcc");
+		System.out.println("minhcc");
+		System.out.println("sdfbk");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

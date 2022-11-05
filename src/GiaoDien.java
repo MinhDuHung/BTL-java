@@ -60,9 +60,22 @@ public class GiaoDien extends JFrame {
 		double sum = 0;
 		for(int i = 0; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
-			SubTotalJTextfield.setText(Double.toString(sum));
-			
 		}
+		SubTotalJTextfield.setText(Double.toString(sum));
+		double cTotal1=Double.parseDouble(SubTotalJTextfield.getText());
+		
+		double cTax=(cTotal1 *3.9)/100;
+		String iTaxTotal=String.format("VND %.2f",cTax);
+		TaxJTextfield.setText(iTaxTotal);
+		
+		String iSubTotal=String.format("VND %.2f",cTotal1);
+		SubTotalJTextfield.setText(iSubTotal);
+		
+
+		String iTotal=String.format("VND %.2f",cTotal1+cTax);
+		TotalJTextfield.setText(iTotal);
+		
+		
 	}
 	public GiaoDien() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,6 +153,13 @@ public class GiaoDien extends JFrame {
 		ControlPanel.setBounds(10, 11, 135, 470);
 		ContentPanel.add(ControlPanel);
 		ControlPanel.setLayout(null);
+		
+		
+		//function
+		
+		
+		
+		
 		
 		JButton NumberButton1 = new JButton("1");
 		NumberButton1.addActionListener(new ActionListener() {
@@ -298,6 +318,11 @@ public class GiaoDien extends JFrame {
 				}
 			}
 		});
+		
+		
+		
+		
+		
 		NumberButton0.setBounds(73, 303, 46, 58);
 		ControlPanel.add(NumberButton0);
 		

@@ -40,6 +40,7 @@ public class GiaoDien extends JFrame {
 	 */
 	public static void main(String[] args) {
 		System.out.println("minhcc");
+		System.out.println("Phat Dz");
 		System.out.println("sdfbk");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

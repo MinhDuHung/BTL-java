@@ -39,10 +39,15 @@ public class GiaoDien extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		System.out.println("minhcc");
 		System.out.println("Phat Dz");
 		System.out.println("123...");
 		System.out.println("sdfbk");
+=======
+		System.out.println("hihi");
+		System.out.println("hics");
+>>>>>>> Khung-long
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

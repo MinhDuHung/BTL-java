@@ -62,8 +62,46 @@ public class GiaoDien extends JFrame {
 		for (int i = 0; i < table.getRowCount(); i++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 			SubTotalJTextfield.setText(Double.toString(sum));
-
 		}
+		
+		
+//		Phút 42
+		SubTotalJTextfield.setText(Double.toString(sum));
+		double cTotall = Double.parseDouble(SubTotalJTextfield.getText());
+		
+		double cTax = (cTotall * 3.9) / 100;
+		String iTaxTotal = String.format("%.2f", cTax);
+		TotalJTextfield.setText(iTaxTotal);
+		
+		String iSubTotal = String.format("%.2f", cTotall);
+		SubTotalJTextfield.setText(iSubTotal);
+		
+		String iTotal = String.format("%.2f", cTotall + cTax);
+		TotalJTextfield.setText(iTotal);
+		
+		String BarCode = String.format("Total is %.2f", cTotall + cTax);
+		BarCodeJTextField.setText(BarCode);
+		
+	}
+	
+//	------------------------FUNCTION CHANGE-----------------------------------
+	
+	public void Change() {
+		double sum = 0;
+		double tax = 3.9;
+//		Đoạn này 45:44
+		double cash = Double.parseDouble(jtxtDisplay.getText());
+		
+		for (int i = 0; i < table.getRowCount(); i++) {
+			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
+		}
+		
+		double cTax = (sum * 3.9) / 100;
+		double cChange = (cash - (sum + cTax));
+		
+		String ChangeGiven = String.format("%.2f", cChange);
+//		Đoạng này 49:25
+		jtxtChange.setText(ChangeGiven);
 	}
 
 	public GiaoDien() {

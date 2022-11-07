@@ -41,6 +41,7 @@ public class GiaoDien extends JFrame {
 	public static void main(String[] args) {
 		System.out.println("minhcc");
 		System.out.println("Phat Dz");
+		System.out.println("123...");
 		System.out.println("sdfbk");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,6 +64,11 @@ public class GiaoDien extends JFrame {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 			SubTotalJTextfield.setText(Double.toString(sum));
 		}
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> main
 		
 		
 //		Phút 42
@@ -90,18 +96,31 @@ public class GiaoDien extends JFrame {
 		double sum = 0;
 		double tax = 3.9;
 //		Đoạn này 45:44
+<<<<<<< HEAD
 		double cash = Double.parseDouble(jtxtDisplay.getText());
+=======
+//		double cash = Double.parseDouble(jtxtDisplay.getText());
+>>>>>>> main
 		
 		for (int i = 0; i < table.getRowCount(); i++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 		}
 		
 		double cTax = (sum * 3.9) / 100;
+<<<<<<< HEAD
 		double cChange = (cash - (sum + cTax));
 		
 		String ChangeGiven = String.format("%.2f", cChange);
 //		Đoạng này 49:25
 		jtxtChange.setText(ChangeGiven);
+=======
+//		double cChange = (cash - (sum + cTax));
+		
+//		String ChangeGiven = String.format("%.2f", cChange);
+//		Đoạng này 49:25
+//		jtxtChange.setText(ChangeGiven);
+>>>>>>> Stashed changes
+>>>>>>> main
 	}
 
 	public GiaoDien() {

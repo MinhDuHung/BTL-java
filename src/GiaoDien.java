@@ -75,8 +75,27 @@ public class GiaoDien extends JFrame {
 		String iTotal=String.format("VND %.2f",cTotal1+cTax);
 		TotalJTextfield.setText(iTotal);
 		
+		String BarCode=String.format("Tong la %.2f",cTotal1+cTax);
+		BarCodeJTextField.setText(BarCode);
 		
 	}
+	
+	public void Change() {
+		double sum=0;
+		double tax=3.9;
+		double cash= Double.parseDouble(CashJTextfield.getText());
+		
+		for(int i = 0; i < table.getRowCount(); i ++) {
+			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
+		}
+		
+		double cTax=(sum *3.9)/100;
+		double cChange=(cash-(sum+cTax));
+		
+		String ChangeGiven=String.format("VND %.2f",cChange);
+		ChangeJTextfield.setText(ChangeGiven);
+	}
+	
 	public GiaoDien() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 707);

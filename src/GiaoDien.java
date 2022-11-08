@@ -58,8 +58,9 @@ public class GiaoDien extends JFrame {
 	 */
 	public void ItemCost() {
 		double sum = 0;
-		for(int i = 0; i < table.getRowCount(); i ++) {
+		for(int i = 1; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
+			System.out.println(table.getValueAt(i, 2));
 		}
 		SubTotalJTextfield.setText(Double.toString(sum));
 		double cTotal1=Double.parseDouble(SubTotalJTextfield.getText());
@@ -75,7 +76,7 @@ public class GiaoDien extends JFrame {
 		String iTotal=String.format("VND %.2f",cTotal1+cTax);
 		TotalJTextfield.setText(iTotal);
 		
-		String BarCode=String.format("Tong la %.2f",cTotal1+cTax);
+		String BarCode=String.format("%.2f",cTotal1+cTax);
 		BarCodeJTextField.setText(BarCode);
 		
 	}
@@ -113,6 +114,14 @@ public class GiaoDien extends JFrame {
 		
 		
 		JButton ImgButton_1 = new JButton("New button");
+		ImgButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=3.40;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Hien Ho","1",PriceOfItem});
+				ItemCost();
+			}
+		});
 		ImgButton_1.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/hien-ho-1-1647849103775404177231.jpg")));
 		ImgButton_1.setBounds(10, 32, 121, 124);
 		ScreenPanel.add(ImgButton_1);
@@ -494,5 +503,6 @@ public class GiaoDien extends JFrame {
 		BarCodeJTextField.setBounds(155, 409, 212, 72);
 		ContentPanel.add(BarCodeJTextField);
 		BarCodeJTextField.setColumns(10);
+		BarCodeJTextField.setFont(new Font("Code39",Font.PLAIN,60));
 	}
 }

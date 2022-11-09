@@ -39,10 +39,15 @@ public class GiaoDien extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		System.out.println("minhcc");
 		System.out.println("Phat Dz");
 		System.out.println("123...");
 		System.out.println("sdfbk");
+=======
+		System.out.println("hihi");
+		System.out.println("hics");
+>>>>>>> Khung-long
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -62,6 +67,7 @@ public class GiaoDien extends JFrame {
 		double sum = 0;
 		for (int i = 0; i < table.getRowCount(); i++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
+<<<<<<< HEAD
 			SubTotalJTextfield.setText(Double.toString(sum));
 		}
 <<<<<<< HEAD
@@ -86,10 +92,29 @@ public class GiaoDien extends JFrame {
 		TotalJTextfield.setText(iTotal);
 		
 		String BarCode = String.format("Total is %.2f", cTotall + cTax);
+=======
+		}
+		SubTotalJTextfield.setText(Double.toString(sum));
+		double cTotal1=Double.parseDouble(SubTotalJTextfield.getText());
+		
+		double cTax=(cTotal1 *3.9)/100;
+		String iTaxTotal=String.format("VND %.2f",cTax);
+		TaxJTextfield.setText(iTaxTotal);
+		
+		String iSubTotal=String.format("VND %.2f",cTotal1);
+		SubTotalJTextfield.setText(iSubTotal);
+		
+
+		String iTotal=String.format("VND %.2f",cTotal1+cTax);
+		TotalJTextfield.setText(iTotal);
+		
+		String BarCode=String.format("Tong la %.2f",cTotal1+cTax);
+>>>>>>> Khung-long
 		BarCodeJTextField.setText(BarCode);
 		
 	}
 	
+<<<<<<< HEAD
 //	------------------------FUNCTION CHANGE-----------------------------------
 	
 	public void Change() {
@@ -123,6 +148,24 @@ public class GiaoDien extends JFrame {
 >>>>>>> main
 	}
 
+=======
+	public void Change() {
+		double sum=0;
+		double tax=3.9;
+		double cash= Double.parseDouble(CashJTextfield.getText());
+		
+		for(int i = 0; i < table.getRowCount(); i ++) {
+			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
+		}
+		
+		double cTax=(sum *3.9)/100;
+		double cChange=(cash-(sum+cTax));
+		
+		String ChangeGiven=String.format("VND %.2f",cChange);
+		ChangeJTextfield.setText(ChangeGiven);
+	}
+	
+>>>>>>> Khung-long
 	public GiaoDien() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 707);
@@ -199,7 +242,18 @@ public class GiaoDien extends JFrame {
 		ControlPanel.setBounds(10, 11, 135, 470);
 		ContentPanel.add(ControlPanel);
 		ControlPanel.setLayout(null);
+<<<<<<< HEAD
 
+=======
+		
+		
+		//function
+		
+		
+		
+		
+		
+>>>>>>> Khung-long
 		JButton NumberButton1 = new JButton("1");
 		NumberButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,6 +401,11 @@ public class GiaoDien extends JFrame {
 				}
 			}
 		});
+		
+		
+		
+		
+		
 		NumberButton0.setBounds(73, 303, 46, 58);
 		ControlPanel.add(NumberButton0);
 

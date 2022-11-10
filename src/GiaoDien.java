@@ -15,10 +15,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +36,7 @@ public class GiaoDien extends JFrame {
 	private JTextField ChangeJTextfield;
 	private JTable table;
 	private JTextField BarCodeJTextField;
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -106,6 +109,7 @@ public class GiaoDien extends JFrame {
 		ScreenPanel.setLayout(null);
 
 		JButton ImgButton_1 = new JButton("New button");
+		ImgButton_1.setBackground(Color.WHITE);
 		ImgButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=44000;
@@ -114,7 +118,7 @@ public class GiaoDien extends JFrame {
 				ItemCost();
 			}
 		});
-		ImgButton_1.setIcon(new ImageIcon("C:\\Users\\hp\\Downloads\\1.jpg"));
+		ImgButton_1.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-1.png")));
 		ImgButton_1.setBounds(10, 32, 121, 124);
 		ScreenPanel.add(ImgButton_1);
 		
@@ -127,7 +131,7 @@ public class GiaoDien extends JFrame {
 				ItemCost();
 			}
 		});
-		ImgButton_2.setIcon(new ImageIcon("C:\\Users\\hp\\OneDrive\\Pictures\\151308583_1062001670971746_1489805128340411908_n.jpg"));
+		ImgButton_2.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-2.png")));
 		ImgButton_2.setBounds(157, 32, 121, 124);
 		ScreenPanel.add(ImgButton_2);
 		
@@ -140,7 +144,7 @@ public class GiaoDien extends JFrame {
 				ItemCost();
 			}
 		});
-		ImgButton_3.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Dư Hùng Minh-B20DCPT127.jpg")));
+		ImgButton_3.setIcon(null);
 		ImgButton_3.setBounds(300, 32, 121, 124);
 		ScreenPanel.add(ImgButton_3);
 		
@@ -576,11 +580,14 @@ public class GiaoDien extends JFrame {
 		ResetJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		ResetJButton.setBounds(117, 62, 97, 41);
 		Panel_3.add(ResetJButton);
-		
 		JButton ExitJButton = new JButton("EXIT");
 		ExitJButton.setBackground(new Color(128, 128, 128));
 		ExitJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame = new JFrame("Exit");
+				if(JOptionPane.showConfirmDialog(frame, "Confirm if you wanna exit","Point of sale",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) {
+					System.exit(0);
+				}
 			}
 		});
 		ExitJButton.setForeground(Color.BLUE);
@@ -589,6 +596,7 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(ExitJButton);
 		
 		table = new JTable();
+		table.setBackground(Color.WHITE);
 		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {

@@ -8,7 +8,6 @@ import javax.swing.JTable;
 import javax.swing.JTabbedPane;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
-import java.text.MessageFormat;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -16,10 +15,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -35,13 +36,12 @@ public class GiaoDien extends JFrame {
 	private JTextField ChangeJTextfield;
 	private JTable table;
 	private JTextField BarCodeJTextField;
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		System.out.println("hihi");
-		System.out.println("hics");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -61,12 +61,12 @@ public class GiaoDien extends JFrame {
 		double sum = 0;
 		for(int i = 1; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
-			System.out.println(table.getValueAt(i, 2));
 		}
+		
 		SubTotalJTextfield.setText(Double.toString(sum));
 		double cTotal1=Double.parseDouble(SubTotalJTextfield.getText());
 		
-		double cTax=(cTotal1 *3.9)/100;
+		double cTax=(cTotal1 *4)/100;
 		String iTaxTotal=String.format("VND %.2f",cTax);
 		TaxJTextfield.setText(iTaxTotal);
 		
@@ -79,21 +79,16 @@ public class GiaoDien extends JFrame {
 		
 		String BarCode=String.format("%.2f",cTotal1+cTax);
 		BarCodeJTextField.setText(BarCode);
-		
 	}
 	
 	public void Change() {
 		double sum=0;
-		double tax=3.9;
 		double cash= Double.parseDouble(CashJTextfield.getText());
-		
 		for(int i = 1; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 		}
-		
-		double cTax=(sum *3.9)/100;
+		double cTax=(sum *4)/100;
 		double cChange=(cash-(sum+cTax));
-		
 		String ChangeGiven=String.format("VND %.2f",cChange);
 		ChangeJTextfield.setText(ChangeGiven);
 	}
@@ -112,70 +107,162 @@ public class GiaoDien extends JFrame {
 		ScreenPanel.setBounds(377, 11, 585, 470);
 		ContentPanel.add(ScreenPanel);
 		ScreenPanel.setLayout(null);
-		
-		
+
 		JButton ImgButton_1 = new JButton("New button");
+		ImgButton_1.setBackground(Color.WHITE);
 		ImgButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double PriceOfItem=3.40;
+				double PriceOfItem=44000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Hien Ho","1",PriceOfItem});
+				model.addRow(new Object[] {"Coca chanh","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_1.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u3.png"));
-		ImgButton_1.setBounds(10, 32, 121, 124);
+		ImgButton_1.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-1.png")));
+		ImgButton_1.setBounds(10, 32, 121, 134);
 		ScreenPanel.add(ImgButton_1);
 		
 		JButton ImgButton_2 = new JButton("New button");
 		ImgButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=35000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc duong chanh bac ha","1",PriceOfItem});
+				ItemCost();
 			}
 		});
-		ImgButton_2.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u5.png"));
-		ImgButton_2.setBounds(157, 32, 121, 124);
+		ImgButton_2.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-2.png")));
+		ImgButton_2.setBounds(157, 32, 121, 134);
 		ScreenPanel.add(ImgButton_2);
 		
 		JButton ImgButton_3 = new JButton("New button");
-		ImgButton_3.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u6.png"));
-		ImgButton_3.setBounds(300, 32, 121, 124);
+		ImgButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=45000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc que chanh","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_3.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u3.png")));
+		ImgButton_3.setBounds(300, 32, 121, 134);
 		ScreenPanel.add(ImgButton_3);
 		
 		JButton ImgButton_4 = new JButton("New button");
-		ImgButton_4.setBounds(447, 32, 121, 124);
+		ImgButton_4.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u4.png")));
+		ImgButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=45000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Combo nuoc ep chanh va dau","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_4.setBounds(447, 32, 121, 134);
 		ScreenPanel.add(ImgButton_4);
 		
-		JButton ImgButton5 = new JButton("New button");
-		ImgButton5.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u4.png"));
-		ImgButton5.setBounds(10, 167, 121, 124);
-		ScreenPanel.add(ImgButton5);
+		JButton ImgButton_5 = new JButton("New button");
+		ImgButton_5.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u5.png")));
+		ImgButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=27000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Bia SaiGon F1","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_5.setBounds(10, 177, 121, 134);
+		ScreenPanel.add(ImgButton_5);
 		
 		JButton ImgButton_6 = new JButton("New button");
-		ImgButton_6.setBounds(157, 167, 121, 124);
+		ImgButton_6.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u6.png")));
+		ImgButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=25000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Cafe sua","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_6.setBounds(157, 177, 121, 134);
 		ScreenPanel.add(ImgButton_6);
 		
 		JButton ImgButton_7 = new JButton("New button");
-		ImgButton_7.setBounds(300, 167, 121, 124);
+		ImgButton_7.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u7.png")));
+		ImgButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=26000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Combo 3 nuoc ngam hoa qua","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_7.setBounds(300, 177, 121, 134);
 		ScreenPanel.add(ImgButton_7);
 		
 		JButton ImgButton_8 = new JButton("New button");
-		ImgButton_8.setBounds(447, 167, 121, 124);
+		ImgButton_8.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u8.png")));
+		ImgButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=37000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Bia HaNoi F1","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_8.setBounds(447, 177, 121, 134);
 		ScreenPanel.add(ImgButton_8);
 		
 		JButton ImgButton_9 = new JButton("New button");
-		ImgButton_9.setBounds(10, 312, 121, 124);
+		ImgButton_9.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u9.png")));
+		ImgButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=48000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc ep chanh Thuy Sy","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_9.setBounds(10, 325, 121, 134);
 		ScreenPanel.add(ImgButton_9);
 		
-		JButton btnNewButton_10 = new JButton("New button");
-		btnNewButton_10.setBounds(157, 312, 121, 124);
-		ScreenPanel.add(btnNewButton_10);
+		JButton ImgButton_10 = new JButton("New button");
+		ImgButton_10.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u10.png")));
+		ImgButton_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=50000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc ep chanh leo Ha Lan","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_10.setBounds(157, 325, 121, 134);
+		ScreenPanel.add(ImgButton_10);
 		
 		JButton ImgButton_11 = new JButton("New button");
-		ImgButton_11.setBounds(300, 312, 121, 124);
+		ImgButton_11.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u11.png")));
+		ImgButton_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=40000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc ep dau Phap","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_11.setBounds(300, 325, 121, 134);
 		ScreenPanel.add(ImgButton_11);
 		
 		JButton ImgButton_12 = new JButton("New button");
-		ImgButton_12.setBounds(447, 312, 121, 124);
+		ImgButton_12.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u12.png")));
+		ImgButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double PriceOfItem=65000;
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.addRow(new Object[] {"Nuoc ngam chuoi Bi","1",PriceOfItem});
+				ItemCost();
+			}
+		});
+		ImgButton_12.setBounds(447, 325, 121, 134);
 		ScreenPanel.add(ImgButton_12);
 		
 		JPanel ControlPanel = new JPanel();
@@ -372,179 +459,153 @@ public class GiaoDien extends JFrame {
 		ContentPanel.add(detail);
 		detail.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
-		panel_1.setBounds(10, 11, 290, 124);
-		detail.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel Panel_1 = new JPanel();
+		Panel_1.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
+		Panel_1.setBounds(10, 11, 290, 124);
+		detail.add(Panel_1);
+		Panel_1.setLayout(null);
 		
 		JLabel SubTotalLabel = new JLabel("SubTotal");
 		SubTotalLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 20));
 		SubTotalLabel.setBounds(10, 11, 84, 27);
-		panel_1.add(SubTotalLabel);
+		Panel_1.add(SubTotalLabel);
 		
 		JLabel TaxLable = new JLabel("Tax");
 		TaxLable.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 20));
 		TaxLable.setBounds(10, 49, 84, 27);
-		panel_1.add(TaxLable);
+		Panel_1.add(TaxLable);
 		
 		JLabel TotalLabel = new JLabel("Total");
 		TotalLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 20));
 		TotalLabel.setBounds(10, 86, 84, 27);
-		panel_1.add(TotalLabel);
+		Panel_1.add(TotalLabel);
 		
 		SubTotalJTextfield = new JTextField();
 		SubTotalJTextfield.setBounds(104, 11, 165, 27);
-		panel_1.add(SubTotalJTextfield);
+		Panel_1.add(SubTotalJTextfield);
 		SubTotalJTextfield.setColumns(10);
 		
 		TaxJTextfield = new JTextField();
 		TaxJTextfield.setColumns(10);
 		TaxJTextfield.setBounds(104, 49, 165, 27);
-		panel_1.add(TaxJTextfield);
+		Panel_1.add(TaxJTextfield);
 		
 		TotalJTextfield = new JTextField();
 		TotalJTextfield.setColumns(10);
 		TotalJTextfield.setBounds(104, 86, 165, 27);
-		panel_1.add(TotalJTextfield);
+		Panel_1.add(TotalJTextfield);
 		
-		JPanel panel_1_1 = 	new JPanel();
-		panel_1_1.setForeground(Color.RED);
-		panel_1_1.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
-		panel_1_1.setBounds(310, 11, 302, 124);
-		detail.add(panel_1_1);
-		panel_1_1.setLayout(null);
+		JPanel Panel_2 = new JPanel();
+		Panel_2.setForeground(Color.RED);
+		Panel_2.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
+		Panel_2.setBounds(310, 11, 302, 124);
+		detail.add(Panel_2);
+		Panel_2.setLayout(null);
 		
 		JLabel ChangeLabel = new JLabel("Change");
 		ChangeLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 20));
 		ChangeLabel.setBounds(10, 86, 84, 27);
-		panel_1_1.add(ChangeLabel);
+		Panel_2.add(ChangeLabel);
 		
 		JLabel CashLabel = new JLabel("Cash");
 		CashLabel.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 20));
 		CashLabel.setBounds(10, 49, 84, 27);
-		panel_1_1.add(CashLabel);
+		Panel_2.add(CashLabel);
 		
 		JLabel PaymentMethodLable = new JLabel("PaymentMethod");
 		PaymentMethodLable.setFont(new Font("Yu Gothic UI Light", Font.BOLD | Font.ITALIC, 17));
 		PaymentMethodLable.setBounds(10, 11, 134, 27);
-		panel_1_1.add(PaymentMethodLable);
+		Panel_2.add(PaymentMethodLable);
 		
 		CashJTextfield = new JTextField();
 		CashJTextfield.setColumns(10);
 		CashJTextfield.setBounds(144, 49, 148, 27);
-		panel_1_1.add(CashJTextfield);
+		Panel_2.add(CashJTextfield);
 		
 		ChangeJTextfield = new JTextField();
 		ChangeJTextfield.setColumns(10);
 		ChangeJTextfield.setBounds(144, 86, 148, 27);
-		panel_1_1.add(ChangeJTextfield);
+		Panel_2.add(ChangeJTextfield);
 		
 		JComboBox PaymentMethodJComboBox = new JComboBox();
 		PaymentMethodJComboBox.setFont(new Font("Stencil", Font.PLAIN, 15));
 		PaymentMethodJComboBox.setModel(new DefaultComboBoxModel(new String[] {"Tien mat", "Chuyen khoan ngan hang", "Ghi no"}));
 		PaymentMethodJComboBox.setSelectedIndex(-1);
 		PaymentMethodJComboBox.setBounds(144, 16, 148, 22);
-		panel_1_1.add(PaymentMethodJComboBox);
+		Panel_2.add(PaymentMethodJComboBox);
 		
-		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
-		panel_1_2.setBounds(622, 11, 303, 124);
-		detail.add(panel_1_2);
-		panel_1_2.setLayout(null);
+		JPanel Panel_3 = new JPanel();
+		Panel_3.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
+		Panel_3.setBounds(622, 11, 303, 124);
+		detail.add(Panel_3);
+		Panel_3.setLayout(null);
 		
 		JButton BuyJButton = new JButton("BUY");
 		BuyJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(PaymentMethodJComboBox.getSelectedItem().equals("Tien mat")) {
 					Change();
-				}
-				else {
+				}else {
 					ChangeJTextfield.setText("");
 					CashJTextfield.setText("");
-					
 				}
 			}
 		});
 		BuyJButton.setForeground(Color.RED);
 		BuyJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		BuyJButton.setBounds(10, 11, 97, 41);
-		panel_1_2.add(BuyJButton);
+		Panel_3.add(BuyJButton);
 		
 		JButton PrintfJButton = new JButton("PRINTF");
-		PrintfJButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MessageFormat Header =new MessageFormat("Đang in");
-				MessageFormat Footer =new MessageFormat("Trang {0,number,interger}");
-				try {
-					table.print(JTable.PrintMode.NORMAL,Header,Footer);
-				}
-				catch(java.awt.print.PrinterException er) {
-					System.err.format("Không tìm thấy máy in", er.getMessage());
-				}
-			}
-		});
 		PrintfJButton.setForeground(Color.RED);
 		PrintfJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		PrintfJButton.setBounds(10, 62, 97, 41);
-		panel_1_2.add(PrintfJButton);
+		Panel_3.add(PrintfJButton);
 		
 		JButton RemoveJButton = new JButton("REMOVE");
 		RemoveJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				int RemoveItem=table.getSelectedRow();
-				if(RemoveItem>0)
-				{
-					model.removeRow(RemoveItem);
-					
-				}
-				ItemCost();
-				if(PaymentMethodJComboBox.getSelectedItem().equals("Tien mat")) {
-					Change();
-				}
-				else {
-					ChangeJTextfield.setText("");
-					CashJTextfield.setText("");
-					
-				}
 			}
 		});
 		RemoveJButton.setForeground(Color.RED);
-		RemoveJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		RemoveJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
 		RemoveJButton.setBounds(117, 11, 97, 41);
-		panel_1_2.add(RemoveJButton);
+		Panel_3.add(RemoveJButton);
 		
 		JButton ResetJButton = new JButton("RESET");
 		ResetJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				model.setRowCount(0);
-				ChangeJTextfield.setText("");
-				TaxJTextfield.setText("");
-				TotalJTextfield.setText("");
-				SubTotalJTextfield.setText("");
 				CashJTextfield.setText("");
+				ChangeJTextfield.setText("");
 				BarCodeJTextField.setText("");
+				TaxJTextfield.setText("");
+				SubTotalJTextfield.setText("");
+				TotalJTextfield.setText("");
 			}
 		});
 		ResetJButton.setForeground(Color.RED);
 		ResetJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		ResetJButton.setBounds(117, 62, 97, 41);
-		panel_1_2.add(ResetJButton);
-		
+		Panel_3.add(ResetJButton);
 		JButton ExitJButton = new JButton("EXIT");
-		ExitJButton.setBackground(new Color(64, 64, 64));
+		ExitJButton.setBackground(new Color(128, 128, 128));
 		ExitJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame = new JFrame("Exit");
+				if(JOptionPane.showConfirmDialog(frame, "Confirm if you wanna exit","Point of sale",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) {
+					System.exit(0);
+				}
 			}
 		});
 		ExitJButton.setForeground(Color.BLUE);
 		ExitJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
 		ExitJButton.setBounds(228, 11, 65, 89);
-		panel_1_2.add(ExitJButton);
+		Panel_3.add(ExitJButton);
 		
 		table = new JTable();
+		table.setBackground(Color.WHITE);
 		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -561,6 +622,6 @@ public class GiaoDien extends JFrame {
 		BarCodeJTextField.setBounds(155, 409, 212, 72);
 		ContentPanel.add(BarCodeJTextField);
 		BarCodeJTextField.setColumns(10);
-		BarCodeJTextField.setFont(new Font("Code39",Font.PLAIN,60));
+		BarCodeJTextField.setFont(new Font("Code39",Font.PLAIN,30));
 	}
 }

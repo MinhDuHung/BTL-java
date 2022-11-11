@@ -86,7 +86,7 @@ public class GiaoDien extends JFrame {
 		double tax=3.9;
 		double cash= Double.parseDouble(CashJTextfield.getText());
 		
-		for(int i = 0; i < table.getRowCount(); i ++) {
+		for(int i = 1; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 		}
 		
@@ -406,7 +406,7 @@ public class GiaoDien extends JFrame {
 		TotalJTextfield.setBounds(104, 86, 165, 27);
 		panel_1.add(TotalJTextfield);
 		
-		JPanel panel_1_1 = new JPanel();
+		JPanel panel_1_1 = 	new JPanel();
 		panel_1_1.setForeground(Color.RED);
 		panel_1_1.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
 		panel_1_1.setBounds(310, 11, 302, 124);
@@ -452,6 +452,18 @@ public class GiaoDien extends JFrame {
 		panel_1_2.setLayout(null);
 		
 		JButton BuyJButton = new JButton("BUY");
+		BuyJButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(PaymentMethodJComboBox.getSelectedItem().equals("Tien mat")) {
+					Change();
+				}
+				else {
+					ChangeJTextfield.setText("");
+					CashJTextfield.setText("");
+					
+				}
+			}
+		});
 		BuyJButton.setForeground(Color.RED);
 		BuyJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		BuyJButton.setBounds(10, 11, 97, 41);
@@ -464,6 +476,10 @@ public class GiaoDien extends JFrame {
 		panel_1_2.add(PrintfJButton);
 		
 		JButton RemoveJButton = new JButton("REMOVE");
+		RemoveJButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		RemoveJButton.setForeground(Color.RED);
 		RemoveJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		RemoveJButton.setBounds(117, 11, 97, 41);

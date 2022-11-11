@@ -1,4 +1,4 @@
-package Image;
+
 
 import java.awt.EventQueue;
 
@@ -125,7 +125,7 @@ public class GiaoDien extends JFrame {
 				ItemCost();
 			}
 		});
-		ImgButton_1.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/hien-ho-1-1647849103775404177231.jpg")));
+		ImgButton_1.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u3.png"));
 		ImgButton_1.setBounds(10, 32, 121, 124);
 		ScreenPanel.add(ImgButton_1);
 		
@@ -134,12 +134,12 @@ public class GiaoDien extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		ImgButton_2.setIcon(new ImageIcon("C:\\Users\\hp\\OneDrive\\Pictures\\151308583_1062001670971746_1489805128340411908_n.jpg"));
+		ImgButton_2.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u5.png"));
 		ImgButton_2.setBounds(157, 32, 121, 124);
 		ScreenPanel.add(ImgButton_2);
 		
 		JButton ImgButton_3 = new JButton("New button");
-		ImgButton_3.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Dư Hùng Minh-B20DCPT127.jpg")));
+		ImgButton_3.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u6.png"));
 		ImgButton_3.setBounds(300, 32, 121, 124);
 		ScreenPanel.add(ImgButton_3);
 		
@@ -148,6 +148,7 @@ public class GiaoDien extends JFrame {
 		ScreenPanel.add(ImgButton_4);
 		
 		JButton ImgButton5 = new JButton("New button");
+		ImgButton5.setIcon(new ImageIcon("C:\\Users\\Lautom\\Documents\\BTL java\\BTL-java\\src\\Image\\u4.png"));
 		ImgButton5.setBounds(10, 167, 121, 124);
 		ScreenPanel.add(ImgButton5);
 		

@@ -1,3 +1,5 @@
+package Image;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTabbedPane;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
+import java.text.MessageFormat;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -470,6 +473,18 @@ public class GiaoDien extends JFrame {
 		panel_1_2.add(BuyJButton);
 		
 		JButton PrintfJButton = new JButton("PRINTF");
+		PrintfJButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MessageFormat Header =new MessageFormat("Đang in");
+				MessageFormat Footer =new MessageFormat("Trang {0,number,interger}");
+				try {
+					table.print(JTable.PrintMode.NORMAL,Header,Footer);
+				}
+				catch(java.awt.print.PrinterException e) {
+					System.err.format("Không tìm thấy máy in", e.getMessage());
+				}
+			}
+		});
 		PrintfJButton.setForeground(Color.RED);
 		PrintfJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		PrintfJButton.setBounds(10, 62, 97, 41);
@@ -478,6 +493,22 @@ public class GiaoDien extends JFrame {
 		JButton RemoveJButton = new JButton("REMOVE");
 		RemoveJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				int RemoveItem=table.getSelectedRow();
+				if(RemoveItem>0)
+				{
+					model.removeRow(RemoveItem);
+					
+				}
+				ItemCost();
+				if(PaymentMethodJComboBox.getSelectedItem().equals("Tien mat")) {
+					Change();
+				}
+				else {
+					ChangeJTextfield.setText("");
+					CashJTextfield.setText("");
+					
+				}
 			}
 		});
 		RemoveJButton.setForeground(Color.RED);
@@ -486,6 +517,18 @@ public class GiaoDien extends JFrame {
 		panel_1_2.add(RemoveJButton);
 		
 		JButton ResetJButton = new JButton("RESET");
+		ResetJButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				model.setRowCount(0);
+				ChangeJTextfield.setText("");
+				TaxJTextfield.setText("");
+				TotalJTextfield.setText("");
+				SubTotalJTextfield.setText("");
+				CashJTextfield.setText("");
+				BarCodeJTextField.setText("");
+			}
+		});
 		ResetJButton.setForeground(Color.RED);
 		ResetJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		ResetJButton.setBounds(117, 62, 97, 41);

@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.JTabbedPane;
 import java.awt.Color;
 import java.beans.PropertyChangeListener;
+import java.text.MessageFormat;
 import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -559,6 +560,18 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(BuyJButton);
 		
 		JButton PrintfJButton = new JButton("PRINTF");
+		PrintfJButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MessageFormat Header =new MessageFormat("Đang in");
+				MessageFormat Footer =new MessageFormat("Trang {0,number,interger}");
+				try {
+					table.print(JTable.PrintMode.NORMAL,Header,Footer);
+				}
+				catch(java.awt.print.PrinterException er) {
+					System.err.format("Không tìm thấy máy in", er.getMessage());
+				}
+			}
+		});
 		PrintfJButton.setForeground(Color.RED);
 		PrintfJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		PrintfJButton.setBounds(10, 62, 97, 41);
@@ -567,6 +580,21 @@ public class GiaoDien extends JFrame {
 		JButton RemoveJButton = new JButton("REMOVE");
 		RemoveJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model =(DefaultTableModel) table.getModel();
+				int RemoveItem=table.getSelectedRow();
+				if(RemoveItem>0)
+				{
+					model.removeRow(RemoveItem);
+					
+				}
+				ItemCost();
+				if(PaymentMethodJComboBox.getSelectedItem().equals("Tien mat")) {
+					Change();
+				}
+				else {
+					ChangeJTextfield.setText("");
+					CashJTextfield.setText("");
+				}
 			}
 		});
 		RemoveJButton.setForeground(Color.RED);

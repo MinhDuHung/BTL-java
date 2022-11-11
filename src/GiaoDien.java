@@ -483,8 +483,8 @@ public class GiaoDien extends JFrame {
 				try {
 					table.print(JTable.PrintMode.NORMAL,Header,Footer);
 				}
-				catch(java.awt.print.PrinterException e) {
-					System.err.format("Không tìm thấy máy in", e.getMessage());
+				catch(java.awt.print.PrinterException er) {
+					System.err.format("Không tìm thấy máy in", er.getMessage());
 				}
 			}
 		});
@@ -510,7 +510,6 @@ public class GiaoDien extends JFrame {
 				else {
 					ChangeJTextfield.setText("");
 					CashJTextfield.setText("");
-					
 				}
 			}
 		});

@@ -85,6 +85,8 @@ public class GiaoDien extends JFrame {
 	}
 	
 	public void Change() {
+		
+		
 		double sum=0;
 		double tax=3.9;
 		double cash= Double.parseDouble(CashJTextfield.getText());

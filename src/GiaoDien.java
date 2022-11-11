@@ -84,7 +84,7 @@ public class GiaoDien extends JFrame {
 	public void Change() {
 		double sum=0;
 		double cash= Double.parseDouble(CashJTextfield.getText());
-		for(int i = 0; i < table.getRowCount(); i ++) {
+		for(int i = 1; i < table.getRowCount(); i ++) {
 			sum = sum + Double.parseDouble(table.getValueAt(i, 2).toString());
 		}
 		double cTax=(sum *4)/100;
@@ -114,12 +114,12 @@ public class GiaoDien extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=44000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 1","1",PriceOfItem});
+				model.addRow(new Object[] {"Coca chanh","1",PriceOfItem});
 				ItemCost();
 			}
 		});
 		ImgButton_1.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-1.png")));
-		ImgButton_1.setBounds(10, 32, 121, 124);
+		ImgButton_1.setBounds(10, 32, 121, 134);
 		ScreenPanel.add(ImgButton_1);
 		
 		JButton ImgButton_2 = new JButton("New button");
@@ -127,12 +127,12 @@ public class GiaoDien extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=35000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 2","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc duong chanh bac ha","1",PriceOfItem});
 				ItemCost();
 			}
 		});
 		ImgButton_2.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/Untitled-2.png")));
-		ImgButton_2.setBounds(157, 32, 121, 124);
+		ImgButton_2.setBounds(157, 32, 121, 134);
 		ScreenPanel.add(ImgButton_2);
 		
 		JButton ImgButton_3 = new JButton("New button");
@@ -140,120 +140,129 @@ public class GiaoDien extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=45000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 3","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc que chanh","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_3.setIcon(null);
-		ImgButton_3.setBounds(300, 32, 121, 124);
+		ImgButton_3.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u3.png")));
+		ImgButton_3.setBounds(300, 32, 121, 134);
 		ScreenPanel.add(ImgButton_3);
 		
 		JButton ImgButton_4 = new JButton("New button");
+		ImgButton_4.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u4.png")));
 		ImgButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=45000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 4","1",PriceOfItem});
+				model.addRow(new Object[] {"Combo nuoc ep chanh va dau","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_4.setBounds(447, 32, 121, 124);
+		ImgButton_4.setBounds(447, 32, 121, 134);
 		ScreenPanel.add(ImgButton_4);
 		
 		JButton ImgButton_5 = new JButton("New button");
+		ImgButton_5.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u5.png")));
 		ImgButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=27000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 5","1",PriceOfItem});
+				model.addRow(new Object[] {"Bia SaiGon F1","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_5.setBounds(10, 167, 121, 124);
+		ImgButton_5.setBounds(10, 177, 121, 134);
 		ScreenPanel.add(ImgButton_5);
 		
 		JButton ImgButton_6 = new JButton("New button");
+		ImgButton_6.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u6.png")));
 		ImgButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=25000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 6","1",PriceOfItem});
+				model.addRow(new Object[] {"Cafe sua","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_6.setBounds(157, 167, 121, 124);
+		ImgButton_6.setBounds(157, 177, 121, 134);
 		ScreenPanel.add(ImgButton_6);
 		
 		JButton ImgButton_7 = new JButton("New button");
+		ImgButton_7.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u7.png")));
 		ImgButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=26000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 7","1",PriceOfItem});
+				model.addRow(new Object[] {"Combo 3 nuoc ngam hoa qua","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_7.setBounds(300, 167, 121, 124);
+		ImgButton_7.setBounds(300, 177, 121, 134);
 		ScreenPanel.add(ImgButton_7);
 		
 		JButton ImgButton_8 = new JButton("New button");
+		ImgButton_8.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u8.png")));
 		ImgButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=37000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 8","1",PriceOfItem});
+				model.addRow(new Object[] {"Bia HaNoi F1","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_8.setBounds(447, 167, 121, 124);
+		ImgButton_8.setBounds(447, 177, 121, 134);
 		ScreenPanel.add(ImgButton_8);
 		
 		JButton ImgButton_9 = new JButton("New button");
+		ImgButton_9.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u9.png")));
 		ImgButton_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=48000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 9","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc ep chanh Thuy Sy","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_9.setBounds(10, 312, 121, 124);
+		ImgButton_9.setBounds(10, 325, 121, 134);
 		ScreenPanel.add(ImgButton_9);
 		
 		JButton ImgButton_10 = new JButton("New button");
+		ImgButton_10.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u10.png")));
 		ImgButton_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=50000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 10","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc ep chanh leo Ha Lan","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_10.setBounds(157, 312, 121, 124);
+		ImgButton_10.setBounds(157, 325, 121, 134);
 		ScreenPanel.add(ImgButton_10);
 		
 		JButton ImgButton_11 = new JButton("New button");
+		ImgButton_11.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u11.png")));
 		ImgButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=40000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 11","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc ep dau Phap","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_11.setBounds(300, 312, 121, 124);
+		ImgButton_11.setBounds(300, 325, 121, 134);
 		ScreenPanel.add(ImgButton_11);
 		
 		JButton ImgButton_12 = new JButton("New button");
+		ImgButton_12.setIcon(new ImageIcon(GiaoDien.class.getResource("/Image/u12.png")));
 		ImgButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double PriceOfItem=65000;
 				DefaultTableModel model =(DefaultTableModel) table.getModel();
-				model.addRow(new Object[] {"Mon thu 12","1",PriceOfItem});
+				model.addRow(new Object[] {"Nuoc ngam chuoi Bi","1",PriceOfItem});
 				ItemCost();
 			}
 		});
-		ImgButton_12.setBounds(447, 312, 121, 124);
+		ImgButton_12.setBounds(447, 325, 121, 134);
 		ScreenPanel.add(ImgButton_12);
 		
 		JPanel ControlPanel = new JPanel();

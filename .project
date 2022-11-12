@@ -14,6 +14,13 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Font/BARCODEFONT.TTF</name>
+			<type>1</type>
+			<location>C:/USERS/HP/APPDATA/LOCAL/MICROSOFT/WINDOWS/FONTS/BARCODEFONT.TTF</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1667395241328</id>

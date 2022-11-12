@@ -5,11 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTable;
-import javax.swing.JTabbedPane;
 import java.awt.Color;
-import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
-import java.beans.PropertyChangeEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,19 +14,15 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.management.loading.PrivateClassLoader;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JSlider;
+import javax.swing.ListSelectionModel;
 
 public class GiaoDien extends JFrame {
-
 	private JPanel ContentPanel;
 	private JTextField SubTotalJTextfield;
 	private JTextField TaxJTextfield;
@@ -40,9 +33,6 @@ public class GiaoDien extends JFrame {
 	private JTextField BarCodeJTextField;
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,9 +46,6 @@ public class GiaoDien extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public void ItemCost() {
 		double sum = 0;
 		for (int i = 1; i < table.getRowCount(); i++) {
@@ -122,7 +109,7 @@ public class GiaoDien extends JFrame {
 
 	public GiaoDien() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1021, 706);
+		setBounds(100, 100, 1080, 706);
 		ContentPanel = new JPanel();
 		ContentPanel.setBackground(new Color(135, 206, 235));
 		ContentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,7 +120,7 @@ public class GiaoDien extends JFrame {
 		JPanel ScreenPanel = new JPanel();
 		ScreenPanel.setBackground(new Color(255, 255, 224));
 		ScreenPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		ScreenPanel.setBounds(410, 11, 585, 470);
+		ScreenPanel.setBounds(475, 11, 585, 470);
 		ContentPanel.add(ScreenPanel);
 		ScreenPanel.setLayout(null);
 
@@ -145,16 +132,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Coca chanh")){
+					if (table.getValueAt(i, 0).equals("Coca chanh")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Coca chanh","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Coca chanh", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -170,16 +157,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc duong chanh bac ha")){
+					if (table.getValueAt(i, 0).equals("Nuoc duong chanh bac ha")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i, 1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc duong chanh bac ha","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc duong chanh bac ha", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -195,16 +182,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc que chanh")){
+					if (table.getValueAt(i, 0).equals("Nuoc que chanh")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc que chanh","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc que chanh", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -221,16 +208,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Combo nuoc ep chanh va dau")){
+					if (table.getValueAt(i, 0).equals("Combo nuoc ep chanh va dau")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Combo nuoc ep chanh va dau","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Combo nuoc ep chanh va dau", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -246,16 +233,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Bia SaiGon F1")){
+					if (table.getValueAt(i, 0).equals("Bia SaiGon F1")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Bia SaiGon F1","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Bia SaiGon F1", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -271,16 +258,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Cafe sua")){
+					if (table.getValueAt(i, 0).equals("Cafe sua")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Cafe sua","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Cafe sua", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -296,16 +283,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Combo 3 nuoc ngam hoa qua")){
+					if (table.getValueAt(i, 0).equals("Combo 3 nuoc ngam hoa qua")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Combo 3 nuoc ngam hoa qua","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Combo 3 nuoc ngam hoa qua", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -321,16 +308,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Bia HaNoi F1")){
+					if (table.getValueAt(i, 0).equals("Bia HaNoi F1")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Bia HaNoi F1","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Bia HaNoi F1", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -346,16 +333,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc ep chanh Thuy Sy")){
+					if (table.getValueAt(i, 0).equals("Nuoc ep chanh Thuy Sy")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc ep chanh Thuy Sy","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc ep chanh Thuy Sy", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -371,16 +358,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc ep chanh leo Ha Lan")){
+					if (table.getValueAt(i, 0).equals("Nuoc ep chanh leo Ha Lan")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc ep chanh leo Ha Lan","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc ep chanh leo Ha Lan", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -396,16 +383,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc ep dau Phap")){
+					if (table.getValueAt(i, 0).equals("Nuoc ep dau Phap")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc ep dau Phap","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc ep dau Phap", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -421,16 +408,16 @@ public class GiaoDien extends JFrame {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int x = -1;
 				for (int i = 1; i < table.getRowCount(); i++) {
-					if (table.getValueAt(i, 0).equals("Nuoc ngam chuoi Bi")){
+					if (table.getValueAt(i, 0).equals("Nuoc ngam chuoi Bi")) {
 						x = Integer.parseInt(table.getValueAt(i, 1).toString()) + 1;
 						PriceOfItem *= x;
-						table.setValueAt(x,i,1);
-						table.setValueAt(PriceOfItem,i, 2);
+						table.setValueAt(x, i, 1);
+						table.setValueAt(PriceOfItem, i, 2);
 						break;
 					}
 				}
-				if(x == -1) {
-					model.addRow(new Object[] { "Nuoc ngam chuoi Bi","1", PriceOfItem });
+				if (x == -1) {
+					model.addRow(new Object[] { "Nuoc ngam chuoi Bi", "1", PriceOfItem });
 				}
 				ItemCost();
 			}
@@ -610,7 +597,7 @@ public class GiaoDien extends JFrame {
 
 		JPanel detail = new JPanel();
 		detail.setBorder(new MatteBorder(3, 3, 2, 2, (Color) new Color(0, 0, 0)));
-		detail.setBounds(27, 511, 935, 146);
+		detail.setBounds(63, 510, 935, 146);
 		ContentPanel.add(detail);
 		detail.setLayout(null);
 
@@ -722,7 +709,7 @@ public class GiaoDien extends JFrame {
 		JButton PrintfJButton = new JButton("PRINTF");
 		PrintfJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MessageFormat Header = new MessageFormat("Loading");
+				MessageFormat Header = new MessageFormat("Bill");
 				MessageFormat Footer = new MessageFormat("Page {0,number,interger}");
 				try {
 					table.print(JTable.PrintMode.NORMAL, Header, Footer);
@@ -793,23 +780,36 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(ExitJButton);
 
 		table = new JTable();
+		table.setFillsViewportHeight(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setColumnSelectionAllowed(true);
 		table.setBackground(Color.WHITE);
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		table.setModel(
-				new DefaultTableModel(new Object[][] { { "Item", "Qty", "Amount" }, }, new String[] { "1", "2", "3" }) {
-					boolean[] columnEditables = new boolean[] { false, false, false };
-
-					public boolean isCellEditable(int row, int column) {
-						return columnEditables[column];
-					}
-				});
-		table.setBounds(175, 11, 213, 387);
+				new DefaultTableModel(
+			new Object[][] {
+				{"Item", "Qty", "Amount"},
+			},
+			new String[] {
+				"1", "2", "3"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setPreferredWidth(180);
+		table.getColumnModel().getColumn(1).setPreferredWidth(30);
+		table.getColumnModel().getColumn(2).setPreferredWidth(70);
+		table.setBounds(175, 11, 290, 387);
 		ContentPanel.add(table);
 
 		BarCodeJTextField = new JTextField();
 		BarCodeJTextField.setEditable(false);
-		BarCodeJTextField.setBounds(175, 409, 212, 72);
+		BarCodeJTextField.setBounds(175, 409, 290, 72);
 		ContentPanel.add(BarCodeJTextField);
 		BarCodeJTextField.setColumns(10);
 		BarCodeJTextField.setFont(new Font("barcode font", Font.PLAIN, 62));

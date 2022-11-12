@@ -31,21 +31,6 @@ public class GiaoDien extends JFrame {
 	private JTextField ChangeJTextfield;
 	private JTable table;
 	private JTextField BarCodeJTextField;
-	private JFrame frame;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GiaoDien frame = new GiaoDien();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public void ItemCost() {
 		double sum = 0;
@@ -108,7 +93,10 @@ public class GiaoDien extends JFrame {
 		ChangeJTextfield.setText(ChangeGiven);
 	}
 
-	public GiaoDien() {
+	public GiaoDien(String UserID) {
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setTitle("Hello " + UserID);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1080, 706);
 		ContentPanel = new JPanel();
@@ -782,7 +770,7 @@ public class GiaoDien extends JFrame {
 		ExitJButton.setBackground(new Color(224, 255, 255));
 		ExitJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame = new JFrame("Exit");
+				JFrame frame = new JFrame("Exit");
 				if (JOptionPane.showConfirmDialog(frame, "Confirm if you wanna exit", "Point of sale",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
 					System.exit(0);

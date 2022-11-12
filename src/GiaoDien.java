@@ -39,6 +39,7 @@ public class GiaoDien extends JFrame {
 				try {
 					GiaoDien frame = new GiaoDien();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -435,6 +436,7 @@ public class GiaoDien extends JFrame {
 		// function
 
 		JButton NumberButton1 = new JButton("1");
+		NumberButton1.setFocusable(false);
 		NumberButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String EnterNumber = CashJTextfield.getText();
@@ -450,6 +452,7 @@ public class GiaoDien extends JFrame {
 		ControlPanel.add(NumberButton1);
 
 		JButton NumberButton2 = new JButton("2");
+		NumberButton2.setFocusable(false);
 		NumberButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String EnterNumber = CashJTextfield.getText();
@@ -465,6 +468,7 @@ public class GiaoDien extends JFrame {
 		ControlPanel.add(NumberButton2);
 
 		JButton NumberButton3 = new JButton("3");
+		NumberButton3.setFocusable(false);
 		NumberButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String EnterNumber = CashJTextfield.getText();
@@ -581,7 +585,13 @@ public class GiaoDien extends JFrame {
 				}
 			}
 		});
-
+		NumberButton4.setFocusable(false);
+		NumberButton5.setFocusable(false);
+		NumberButton6.setFocusable(false);
+		NumberButton7.setFocusable(false);
+		NumberButton8.setFocusable(false);
+		NumberButton9.setFocusable(false);
+		NumberButton0.setFocusable(false);
 		NumberButton0.setBounds(84, 303, 46, 58);
 		ControlPanel.add(NumberButton0);
 
@@ -691,6 +701,7 @@ public class GiaoDien extends JFrame {
 		Panel_3.setLayout(null);
 
 		JButton BuyJButton = new JButton("BUY");
+		BuyJButton.setFocusable(false);
 		BuyJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (PaymentMethodJComboBox.getSelectedItem().equals("Cash")) {
@@ -707,6 +718,7 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(BuyJButton);
 
 		JButton PrintfJButton = new JButton("PRINTF");
+		PrintfJButton.setFocusable(false);
 		PrintfJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MessageFormat Header = new MessageFormat("Bill");
@@ -724,6 +736,7 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(PrintfJButton);
 
 		JButton RemoveJButton = new JButton("REMOVE");
+		RemoveJButton.setFocusable(false);
 		RemoveJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -747,6 +760,7 @@ public class GiaoDien extends JFrame {
 		Panel_3.add(RemoveJButton);
 
 		JButton ResetJButton = new JButton("RESET");
+		ResetJButton.setFocusable(false);
 		ResetJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -764,6 +778,7 @@ public class GiaoDien extends JFrame {
 		ResetJButton.setBounds(117, 62, 97, 41);
 		Panel_3.add(ResetJButton);
 		JButton ExitJButton = new JButton("EXIT");
+		ExitJButton.setFocusable(false);
 		ExitJButton.setBackground(new Color(224, 255, 255));
 		ExitJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -786,21 +801,13 @@ public class GiaoDien extends JFrame {
 		table.setBackground(Color.WHITE);
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		table.setModel(
-				new DefaultTableModel(
-			new Object[][] {
-				{"Item", "Qty", "Amount"},
-			},
-			new String[] {
-				"1", "2", "3"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+				new DefaultTableModel(new Object[][] { { "Item", "Qty", "Amount" }, }, new String[] { "1", "2", "3" }) {
+					boolean[] columnEditables = new boolean[] { false, false, false };
+
+					public boolean isCellEditable(int row, int column) {
+						return columnEditables[column];
+					}
+				});
 		table.getColumnModel().getColumn(0).setPreferredWidth(180);
 		table.getColumnModel().getColumn(1).setPreferredWidth(30);
 		table.getColumnModel().getColumn(2).setPreferredWidth(70);

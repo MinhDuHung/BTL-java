@@ -1,16 +1,41 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import Entity.User;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 
 public class SignInPage extends JFrame implements ActionListener {
+	
+	public static void ReadWriteObject(String userName,String password) {
+	        User user = new User(); 
+	        try {  
+	        	user.setUserName(userName);
+	        	user.setPassword(password);
+	            FileOutputStream f = new FileOutputStream("userInfor.txt"); 
+	            ObjectOutputStream oStream = new ObjectOutputStream(f);
+	            oStream.writeObject(user); 
+	            oStream.close();
+	        } catch (IOException e) {
+	            System.out.println("Error Write file");
+	        }
+	
+	}
+	
 	IDandPassword IaP = new IDandPassword();
 	private JTextField IDtextField;
 	private JTextField PWtextField;
@@ -28,7 +53,7 @@ public class SignInPage extends JFrame implements ActionListener {
 		getContentPane().add(IDLabel);
 		
 		IDtextField = new JTextField();
-		IDtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 20));
+		IDtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
 		IDtextField.setBounds(207, 90, 191, 20);
 		getContentPane().add(IDtextField);
 		IDtextField.setColumns(10);
@@ -41,8 +66,13 @@ public class SignInPage extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				String id = IDtextField.getText();
 				String pw = PWtextField.getText();
-				IaP.logininfo.put(id,pw);
-				
+				String cf= CFtextField.getText();
+				if(pw.equals(cf)==false) {
+					JOptionPane.showMessageDialog(null, "Two password is different");
+				}else {
+//				IaP.logininfo.put(id,pw);
+					ReadWriteObject(id, pw);
+				LoginPage loginPage = new LoginPage(IaP.logininfo);}
 			}
 		});
 		OkButton.setBounds(125, 241, 89, 35);
@@ -54,13 +84,13 @@ public class SignInPage extends JFrame implements ActionListener {
 		getContentPane().add(PasswordLabel);
 		
 		PWtextField = new JTextField();
-		PWtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 20));
+		PWtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
 		PWtextField.setColumns(10);
 		PWtextField.setBounds(207, 135, 191, 20);
 		getContentPane().add(PWtextField);
 		
 		CFtextField = new JTextField();
-		CFtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 20));
+		CFtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
 		CFtextField.setColumns(10);
 		CFtextField.setBounds(207, 173, 191, 20);
 		getContentPane().add(CFtextField);

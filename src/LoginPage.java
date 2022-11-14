@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -10,8 +14,29 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Entity.User;
+
 public class LoginPage implements ActionListener {
 
+	ArrayList< HashMap<String, String>> logininfo = new ArrayList<HashMap<String, String>>();
+
+	public static void FetchDataUser() {
+		 User ms = null;
+		 
+	        try {  
+	            FileInputStream f = new FileInputStream("userInfor.txt"); 
+	            ObjectInputStream inStream = new ObjectInputStream(f);  
+	           
+	            ms = (User) inStream.readObject();
+	            inStream.close();
+	        } catch (ClassNotFoundException e) {
+	            System.out.println("Class not found");
+	        } catch (IOException e) {
+	            System.out.println("Error Read file");
+	        }
+	        System.out.println("My name is " + ms.userName + ". I am " + ms.password + " years old");
+	    }
+	
 	JFrame frame = new JFrame();
 	JButton loginButton = new JButton("Login");
 	JButton resetButton = new JButton("Reset");
@@ -22,7 +47,6 @@ public class LoginPage implements ActionListener {
 
 	JLabel messageLable = new JLabel();
 
-	HashMap<String, String> logininfo = new HashMap<String, String>();
 	JButton SignInButton = new JButton("Sign in");
 
 	LoginPage(HashMap<String, String> loginInfoOriginal) {
@@ -115,6 +139,8 @@ public class LoginPage implements ActionListener {
 	public static void main(String[] args) {
 		IDandPassword idandPassword = new IDandPassword();
 		LoginPage loginPage = new LoginPage(idandPassword.getLoginInfo());
+		
+		FetchDataUser();
 	}
 
 }

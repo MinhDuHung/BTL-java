@@ -18,7 +18,7 @@ import Entity.User;
 
 public class LoginPage implements ActionListener {
 
-	ArrayList< HashMap<String, String>> logininfo = new ArrayList<HashMap<String, String>>();
+	HashMap<String, String> logininfo = new HashMap<String, String>();
 
 	public static void FetchDataUser() {
 		 User ms = null;

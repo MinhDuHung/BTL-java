@@ -38,16 +38,15 @@ public class GiaoDien extends JFrame {
 	private JTable table;
 	private JTextField BarCodeJTextField;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		System.out.println("hihi");
 		System.out.println("hics");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+
 					GiaoDien frame = new GiaoDien();
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,9 +55,6 @@ public class GiaoDien extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public void ItemCost() {
 		double sum = 0;
 		for(int i = 1; i < table.getRowCount(); i ++) {

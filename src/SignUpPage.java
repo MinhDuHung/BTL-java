@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import Entity.User;
+import Entity.UserList;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -19,29 +20,45 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 
-public class SignInPage extends JFrame implements ActionListener {
+public class SignUpPage extends JFrame implements ActionListener {
 
-	public static void ReadWriteObject(String userName, String password) {
-		User user = new User();
-		try {
-			user.setUserName(userName);
-			user.setPassword(password);
-			FileOutputStream f = new FileOutputStream("userInfor.txt");
-			ObjectOutputStream oStream = new ObjectOutputStream(f);
-			oStream.writeObject(user);
-			oStream.close();
-		} catch (IOException e) {
-			System.out.println("Error Write file");
-		}
-
+	public static UserList ReadObject() {
+		UserList userList=new UserList();
+		 try {  
+	            FileInputStream f = new FileInputStream("userfolder/userList.dat"); 
+	            ObjectInputStream inStream = new ObjectInputStream(f); 
+	           
+	            userList = (UserList) inStream.readObject();
+	            inStream.close();
+	        } catch (ClassNotFoundException e) {
+	            System.out.println("Class not found");
+	        } catch (IOException e) {
+	        	System.out.println(userList.getSize());
+	            System.out.println("Error Read file");
+	        } 
+		 return userList;
 	}
-
-	IDandPassword IaP = new IDandPassword();
+	
+	public static void WriteObject(User user) {
+		UserList userList=ReadObject();
+		userList.addUser(user);
+        try {   
+            FileOutputStream f = new FileOutputStream("userfolder/userList.dat"); 
+            ObjectOutputStream oStream = new ObjectOutputStream(f); 
+            oStream.writeObject(userList); 
+            oStream.close();
+        } catch (IOException e) {
+            System.out.println("Error Write file");
+            
+        }
+ 
+	}
+	
 	private JTextField IDtextField;
 	private JTextField PWtextField;
 	private JTextField CFtextField;
 
-	SignInPage() {
+	SignUpPage() {
 		getContentPane().setBackground(new Color(245, 245, 220));
 		getContentPane().setLayout(null);
 		setVisible(true);
@@ -50,12 +67,12 @@ public class SignInPage extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		JLabel IDLabel = new JLabel("User name:");
 		IDLabel.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
-		IDLabel.setBounds(84, 90, 103, 20);
+		IDLabel.setBounds(86, 90, 103, 20);
 		getContentPane().add(IDLabel);
 
 		IDtextField = new JTextField();
-		IDtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
-		IDtextField.setBounds(207, 90, 191, 20);
+		IDtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
+		IDtextField.setBounds(207, 88, 191, 34);
 		getContentPane().add(IDtextField);
 		IDtextField.setColumns(10);
 
@@ -68,12 +85,19 @@ public class SignInPage extends JFrame implements ActionListener {
 				String id = IDtextField.getText();
 				String pw = PWtextField.getText();
 				String cf = CFtextField.getText();
+				UserList userList=ReadObject();
 				if (pw.equals(cf) == false) {
-					JOptionPane.showMessageDialog(null, "Two password is different");
-				} else {
-				IaP.logininfo.put(id,pw);
-					ReadWriteObject(id, pw);
-					LoginPage loginPage = new LoginPage(IaP.logininfo);
+					JOptionPane.showMessageDialog(null, "Hai mat khau khong trung khop!");
+				} else if(id.equals(cf)) {
+					JOptionPane.showMessageDialog(null, "Ten tai khoan va mat khau khong trung nhau");
+				}else if(!userList.CheckUserName(id)) {
+					JOptionPane.showMessageDialog(null, "Ten tai khoan da co nguoi dang ky");
+				}
+				else {
+//					
+					WriteObject(new User(id,pw));
+					JOptionPane.showMessageDialog(null, "Dang ky tai khoan thanh cong!");
+//					
 				}
 			}
 		});
@@ -86,20 +110,20 @@ public class SignInPage extends JFrame implements ActionListener {
 		getContentPane().add(PasswordLabel);
 
 		PWtextField = new JTextField();
-		PWtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
+		PWtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
 		PWtextField.setColumns(10);
-		PWtextField.setBounds(207, 135, 191, 20);
+		PWtextField.setBounds(207, 133, 191, 34);
 		getContentPane().add(PWtextField);
 
 		CFtextField = new JTextField();
-		CFtextField.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
+		CFtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
 		CFtextField.setColumns(10);
-		CFtextField.setBounds(207, 173, 191, 20);
+		CFtextField.setBounds(207, 180, 191, 28);
 		getContentPane().add(CFtextField);
 
 		JLabel ConfirmPasswordLabel = new JLabel("Confirm PassWord:");
 		ConfirmPasswordLabel.setFont(new Font("Yu Gothic UI", Font.BOLD | Font.ITALIC, 15));
-		ConfirmPasswordLabel.setBounds(35, 170, 191, 31);
+		ConfirmPasswordLabel.setBounds(34, 173, 191, 31);
 		getContentPane().add(ConfirmPasswordLabel);
 
 		JButton BackButton = new JButton("Back");
@@ -108,8 +132,7 @@ public class SignInPage extends JFrame implements ActionListener {
 		BackButton.setForeground(new Color(255, 255, 255));
 		BackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IDandPassword idandPassword = new IDandPassword();
-				LoginPage loginPage = new LoginPage(idandPassword.getLoginInfo());
+				LoginPage loginPage = new LoginPage();
 			}
 		});
 		BackButton.setBounds(250, 241, 89, 35);

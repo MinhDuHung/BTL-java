@@ -11,31 +11,33 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Entity.User;
+import Entity.UserList;
 
 public class LoginPage implements ActionListener {
 
-	HashMap<String, String> logininfo = new HashMap<String, String>();
-
-	public static void FetchDataUser() {
-		 User ms = null;
-		 
-	        try {  
-	            FileInputStream f = new FileInputStream("userInfor.txt"); 
-	            ObjectInputStream inStream = new ObjectInputStream(f);  
+	public static UserList ReadObject() {
+		UserList userList=new UserList();
+		 try {  
+	            FileInputStream f = new FileInputStream("userfolder/userList.dat"); 
+	            ObjectInputStream inStream = new ObjectInputStream(f); 
 	           
-	            ms = (User) inStream.readObject();
+	            userList = (UserList) inStream.readObject();
 	            inStream.close();
 	        } catch (ClassNotFoundException e) {
 	            System.out.println("Class not found");
 	        } catch (IOException e) {
 	            System.out.println("Error Read file");
+	            
 	        }
-	        System.out.println("My name is " + ms.userName + ". I am " + ms.password + " years old");
-	    }
+		 return userList;
+	}
+	
+//	HashMap<String, String> logininfo = new HashMap<String, String>();
 	
 	JFrame frame = new JFrame();
 	JButton loginButton = new JButton("Login");
@@ -47,11 +49,11 @@ public class LoginPage implements ActionListener {
 
 	JLabel messageLable = new JLabel();
 
-	JButton SignInButton = new JButton("Sign in");
+	JButton SignUpButton = new JButton("Sign Up");
 
-	LoginPage(HashMap<String, String> loginInfoOriginal) {
+	LoginPage() {
 
-		logininfo = loginInfoOriginal;
+//		logininfo = loginInfoOriginal;
 		userIDLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD | Font.ITALIC, 11));
 
 		userIDLabel.setBounds(50, 100, 75, 25);
@@ -92,55 +94,47 @@ public class LoginPage implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(100,100,456, 404);
 		frame.getContentPane().setLayout(null);
-		SignInButton.addActionListener(this);
-		SignInButton.setForeground(new Color(255, 255, 255));
-		SignInButton.setBackground(new Color(119, 136, 153));
-		SignInButton.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD | Font.ITALIC, 11));
-		SignInButton.setFocusable(false);
-		SignInButton.setBounds(195, 246, 100, 25);
+		SignUpButton.addActionListener(this);
+		SignUpButton.setForeground(new Color(255, 255, 255));
+		SignUpButton.setBackground(new Color(119, 136, 153));
+		SignUpButton.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD | Font.ITALIC, 11));
+		SignUpButton.setFocusable(false);
+		SignUpButton.setBounds(195, 246, 100, 25);
 		
-		frame.getContentPane().add(SignInButton);
+		frame.getContentPane().add(SignUpButton);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		UserList userList=ReadObject();	
 		if (e.getSource() == resetButton) {
 			userIDField.setText("");
 			userPasswordField.setText("");
 		}
-		if (e.getSource() == SignInButton) {
+		if (e.getSource() == SignUpButton) {
 			frame.dispose();
-			SignInPage SP = new SignInPage();
+			SignUpPage SP = new SignUpPage();
 		}
 		if (e.getSource() == loginButton) {
-
+			
 			String userID = userIDField.getText();
-			String password = String.valueOf(userPasswordField.getPassword());
-
-			if (logininfo.containsKey(userID)) {
-				if (logininfo.get(userID).equals(password)) {
-					messageLable.setForeground(Color.green);
-					messageLable.setText("Login Success!");
-					frame.dispose();
-					GiaoDien gd = new GiaoDien(userID);
-				} else {
-					messageLable.setForeground(Color.red);
-					messageLable.setText("Wrong Password!");
-				}
-			} else {
-				messageLable.setForeground(Color.red);
-				messageLable.setText("username not found!");
+			String password = String.valueOf(userPasswordField.getPassword());			
+			
+			if(userList.find(userID, password)==true) {
+				frame.dispose();
+				GiaoDien gd = new GiaoDien(userID);
+			}else {
+				JOptionPane.showMessageDialog(null, "Sai tai khoa/mat khau!");
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		IDandPassword idandPassword = new IDandPassword();
-		LoginPage loginPage = new LoginPage(idandPassword.getLoginInfo());
+//		IDandPassword idandPassword = new IDandPassword();
+		LoginPage loginPage = new LoginPage();
 		
-		FetchDataUser();
 	}
 
 }

@@ -47,9 +47,6 @@ public class GiaoDien extends JFrame {
 		String iSubTotal = String.format("VND %.2f", cTotal1);
 		SubTotalJTextfield.setText(iSubTotal);
 
-		String iTotal = String.format("VND %.2f", cTotal1 + cTax);
-		TotalJTextfield.setText(iTotal);
-
 		String BarCode = String.format("%.2f", cTotal1 + cTax);
 		BarCodeJTextField.setText(BarCode);
 	}
@@ -65,6 +62,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
+		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
 	}
 
 	public void Change2() {
@@ -78,6 +76,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
+		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
 	}
 
 	public void Change3() {
@@ -91,6 +90,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
+		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
 	}
 
 	public GiaoDien(String UserID) {

@@ -71,7 +71,7 @@ public class SignUpPage extends JFrame implements ActionListener {
 		getContentPane().add(IDLabel);
 
 		IDtextField = new JTextField();
-		IDtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
+		IDtextField.setFont(new Font("Be Vietnam Light", Font.BOLD | Font.ITALIC, 12));
 		IDtextField.setBounds(207, 88, 191, 34);
 		getContentPane().add(IDtextField);
 		IDtextField.setColumns(10);
@@ -110,13 +110,13 @@ public class SignUpPage extends JFrame implements ActionListener {
 		getContentPane().add(PasswordLabel);
 
 		PWtextField = new JTextField();
-		PWtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
+		PWtextField.setFont(new Font("Be Vietnam Light", Font.BOLD | Font.ITALIC, 12));
 		PWtextField.setColumns(10);
 		PWtextField.setBounds(207, 133, 191, 34);
 		getContentPane().add(PWtextField);
 
 		CFtextField = new JTextField();
-		CFtextField.setFont(new Font("Be Vietnam Thin", Font.BOLD | Font.ITALIC, 12));
+		CFtextField.setFont(new Font("Be Vietnam Light", Font.BOLD | Font.ITALIC, 12));
 		CFtextField.setColumns(10);
 		CFtextField.setBounds(207, 180, 191, 28);
 		getContentPane().add(CFtextField);

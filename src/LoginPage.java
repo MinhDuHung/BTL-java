@@ -142,4 +142,13 @@ public class LoginPage implements ActionListener {
 		}
 	}
 
+<<<<<<< Updated upstream
 }
+=======
+	public static void main(String[] args) {
+		LoginPage loginPage = new LoginPage();
+		
+	}
+
+}
+>>>>>>> Stashed changes

@@ -34,6 +34,7 @@ public class GiaoDien extends JFrame {
 	private JTextField ChangeJTextfield;
 	private JTable table;
 	private JTextField BarCodeJTextField;
+<<<<<<< Updated upstream
 
 	/**
 	 * Launch the application.
@@ -57,6 +58,9 @@ public class GiaoDien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+=======
+	
+>>>>>>> Stashed changes
 	public void ItemCost() {
 		double sum = 0;
 		for (int i = 0; i < table.getRowCount(); i++) {

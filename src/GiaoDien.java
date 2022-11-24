@@ -62,7 +62,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
-		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
+		TotalJTextfield.setText(String.format("VND %.2f", cash - cChange));
 	}
 
 	public void Change2() {
@@ -76,7 +76,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
-		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
+		TotalJTextfield.setText(String.format("VND %.2f", cash - cChange));
 	}
 
 	public void Change3() {
@@ -90,7 +90,7 @@ public class GiaoDien extends JFrame {
 		double cChange = (cash - (sum + cTax));
 		String ChangeGiven = String.format("VND %.2f", cChange);
 		ChangeJTextfield.setText(ChangeGiven);
-		TotalJTextfield.setText(String.format("VND %.2f",cash-cChange));
+		TotalJTextfield.setText(String.format("VND %.2f", cash - cChange));
 	}
 
 	public GiaoDien(String UserID) {
@@ -595,7 +595,7 @@ public class GiaoDien extends JFrame {
 
 		JPanel detail = new JPanel();
 		detail.setBorder(new MatteBorder(3, 3, 2, 2, (Color) new Color(0, 0, 0)));
-		detail.setBounds(63, 510, 935, 146);
+		detail.setBounds(63, 492, 969, 164);
 		ContentPanel.add(detail);
 		detail.setLayout(null);
 
@@ -684,7 +684,7 @@ public class GiaoDien extends JFrame {
 		JPanel Panel_3 = new JPanel();
 		Panel_3.setBackground(new Color(245, 245, 220));
 		Panel_3.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
-		Panel_3.setBounds(622, 11, 303, 124);
+		Panel_3.setBounds(622, 11, 337, 142);
 		detail.add(Panel_3);
 		Panel_3.setLayout(null);
 
@@ -701,8 +701,8 @@ public class GiaoDien extends JFrame {
 			}
 		});
 		BuyJButton.setForeground(Color.RED);
-		BuyJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		BuyJButton.setBounds(10, 11, 97, 41);
+		BuyJButton.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
+		BuyJButton.setBounds(10, 31, 86, 41);
 		Panel_3.add(BuyJButton);
 
 		JButton PrintfJButton = new JButton("PRINTF");
@@ -719,20 +719,29 @@ public class GiaoDien extends JFrame {
 			}
 		});
 		PrintfJButton.setForeground(Color.RED);
-		PrintfJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		PrintfJButton.setBounds(10, 62, 97, 41);
+		PrintfJButton.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
+		PrintfJButton.setBounds(10, 82, 89, 41);
 		Panel_3.add(PrintfJButton);
 
-		JButton RemoveJButton = new JButton("REMOVE");
+		JButton RemoveJButton = new JButton("1");
 		RemoveJButton.setFocusable(false);
 		RemoveJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				int RemoveItem = table.getSelectedRow();
 				if (RemoveItem > 0) {
-					model.removeRow(RemoveItem);
-
+					int k = Integer.parseInt(table.getValueAt(RemoveItem, 1).toString()) - 1;
+					if (k == 0) {
+						model.removeRow(RemoveItem);
+					} else {
+						Double p = Double.parseDouble(table.getValueAt(RemoveItem, 2).toString());
+						p = p / (k + 1);
+						p *= k;
+						model.setValueAt(k, RemoveItem, 1);
+						model.setValueAt(p, RemoveItem, 2);
+					}
 				}
+
 				ItemCost();
 				if (PaymentMethodJComboBox.getSelectedItem().equals("Cash")) {
 					Change1();
@@ -743,8 +752,8 @@ public class GiaoDien extends JFrame {
 			}
 		});
 		RemoveJButton.setForeground(Color.RED);
-		RemoveJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-		RemoveJButton.setBounds(117, 11, 97, 41);
+		RemoveJButton.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 10));
+		RemoveJButton.setBounds(170, 32, 55, 41);
 		Panel_3.add(RemoveJButton);
 
 		JButton ResetJButton = new JButton("RESET");
@@ -762,8 +771,8 @@ public class GiaoDien extends JFrame {
 			}
 		});
 		ResetJButton.setForeground(Color.RED);
-		ResetJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		ResetJButton.setBounds(117, 62, 97, 41);
+		ResetJButton.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 13));
+		ResetJButton.setBounds(247, 31, 80, 41);
 		Panel_3.add(ResetJButton);
 		JButton ExitJButton = new JButton("EXIT");
 		ExitJButton.setFocusable(false);
@@ -779,8 +788,40 @@ public class GiaoDien extends JFrame {
 		});
 		ExitJButton.setForeground(Color.BLUE);
 		ExitJButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-		ExitJButton.setBounds(228, 11, 65, 89);
+		ExitJButton.setBounds(247, 83, 83, 38);
 		Panel_3.add(ExitJButton);
+		
+		JButton RemoveJButton_1 = new JButton("All");
+		RemoveJButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				int RemoveItem = table.getSelectedRow();
+				if (RemoveItem > 0) {
+					model.removeRow(RemoveItem);
+				}
+				ItemCost();
+				if (PaymentMethodJComboBox.getSelectedItem().equals("Cash")) {
+					Change1();
+				} else if (PaymentMethodJComboBox.getSelectedItem().equals("Banking")) {
+					Change2();
+				} else
+					Change3();
+			}
+		});
+		RemoveJButton_1.setForeground(Color.RED);
+		RemoveJButton_1.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 10));
+		RemoveJButton_1.setFocusable(false);
+		RemoveJButton_1.setBounds(170, 83, 55, 41);
+		Panel_3.add(RemoveJButton_1);
+		
+		JLabel RemoveLabel = new JLabel("REMOVE:");
+		RemoveLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
+		RemoveLabel.setBounds(106, 61, 64, 24);
+		Panel_3.add(RemoveLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(163, 23, 74, 108);
+		Panel_3.add(panel);
 
 		table = new JTable();
 		table.setFillsViewportHeight(true);

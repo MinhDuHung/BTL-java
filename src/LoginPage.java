@@ -126,13 +126,12 @@ public class LoginPage implements ActionListener {
 				frame.dispose();
 				GiaoDien gd = new GiaoDien(userID);
 			}else {
-				JOptionPane.showMessageDialog(null, "Sai tai khoa/mat khau!");
+				JOptionPane.showMessageDialog(null, "Sai tai khoan/mat khau!");
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-//		IDandPassword idandPassword = new IDandPassword();
 		LoginPage loginPage = new LoginPage();
 		
 	}
